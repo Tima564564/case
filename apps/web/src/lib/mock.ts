@@ -111,3 +111,32 @@ export const leaders = [
   { user: "tonmax", volume: 9840, best: "Founder Collectible" },
   { user: "starsqueen", volume: 6420, best: "2500 Stars Jackpot" }
 ];
+
+export const marketplaceListings = [
+  { id: "m1", seller: "giftboss", item: "Royal Telegram Gift", rarity: "Legendary" as Rarity, price: 238, currency: "TON", tag: "Limited" },
+  { id: "m2", seller: "starsqueen", item: "2500 Stars Jackpot", rarity: "Mythic" as Rarity, price: 410, currency: "TON", tag: "Animated" },
+  { id: "m3", seller: "tonmax", item: "Premium Year", rarity: "Epic" as Rarity, price: 72, currency: "USD", tag: "Premium" }
+];
+
+export const starsPacks = [
+  { id: "stars_100", title: "100 Stars", stars: 100, price: 4.5, bonus: 0 },
+  { id: "stars_500", title: "500 Stars", stars: 500, price: 24, bonus: 2 },
+  { id: "stars_1500", title: "1500 Stars", stars: 1500, price: 78, bonus: 10 }
+];
+
+export const vipTiers = [
+  { tier: "Bronze", edgeBack: 1, cashback: 0.5, minVolume: 0 },
+  { tier: "Silver", edgeBack: 2, cashback: 1, minVolume: 250 },
+  { tier: "Gold", edgeBack: 4, cashback: 2, minVolume: 1000 },
+  { tier: "Platinum", edgeBack: 7, cashback: 3.5, minVolume: 5000 },
+  { tier: "Diamond", edgeBack: 12, cashback: 5, minVolume: 20000 }
+];
+
+export const economyStats = {
+  targetRtp: 92,
+  houseEdge: 8,
+  jackpotPool: 18420,
+  online: 738,
+  openingRate: 124,
+  payoutRatio: 89.4
+};
