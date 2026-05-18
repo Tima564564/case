@@ -1,5 +1,5 @@
 import { Radio } from "lucide-react";
-import { liveFeed } from "@/lib/mock";
+import { liveFeed } from "../lib/mock";
 
 export function LiveFeed() {
   return (
