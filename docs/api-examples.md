@@ -4,134 +4,80 @@
 
 ```http
 POST /auth/telegram
-Content-Type: application/json
-
 { "initData": "query_id=...&user=...&hash=..." }
-```
-
-Response:
-
-```json
-{
-  "token": "jwt",
-  "user": { "id": "user_id", "telegramId": "123" }
-}
 ```
 
 ## Cases
 
 ```http
 GET /cases
-Authorization: Bearer jwt
-```
-
-```http
 POST /cases/:caseId/open
-Authorization: Bearer jwt
-Content-Type: application/json
-
 { "clientSeed": "telegram-user-seed-001" }
 ```
 
-## Inventory
+## Gift Inventory And Fusion
 
 ```http
-GET /inventory
+GET /gifts/inventory
 Authorization: Bearer jwt
 ```
 
 ```http
-POST /inventory/:id/sell
+POST /gifts/transfer
 Authorization: Bearer jwt
+{ "inventoryItemId": "inv_id", "receiverTelegramId": "123456789", "message": "gg" }
 ```
 
 ```http
-POST /inventory/:id/upgrade
+POST /gifts/fusion
 Authorization: Bearer jwt
-Content-Type: application/json
-
-{ "targetItemId": "item_id", "clientSeed": "upgrade-seed" }
+{ "inventoryItemIds": ["a", "b"], "targetItemId": "item_id", "clientSeed": "fusion-seed" }
 ```
 
-## PvP
+## Marketplace
 
 ```http
-GET /pvp/battles
-Authorization: Bearer jwt
+GET /marketplace/listings
+POST /marketplace/listings
+{ "inventoryItemId": "inv_id", "price": 25, "currency": "TON" }
+POST /marketplace/listings/:id/buy
 ```
 
-```http
-POST /pvp/battles
-Authorization: Bearer jwt
-Content-Type: application/json
-
-{ "mode": "ONE_VS_ONE", "caseIds": ["case_id"] }
-```
+## TON Connect
 
 ```http
-POST /pvp/battles/:battleId/join
-Authorization: Bearer jwt
-Content-Type: application/json
-
-{ "seat": 2 }
-```
-
-## Rewards
-
-```http
-GET /rewards/tasks
-Authorization: Bearer jwt
+POST /payments/ton/wallets
+{ "address": "EQ...", "network": "mainnet", "proof": { "timestamp": 123 } }
 ```
 
 ```http
-POST /rewards/daily/claim
-Authorization: Bearer jwt
-```
-
-## Referrals
-
-```http
-GET /referrals
-Authorization: Bearer jwt
-```
-
-## Leaderboard
-
-```http
-GET /leaderboard
-```
-
-## Crypto Payments
-
-```http
-POST /payments/deposits
-Authorization: Bearer jwt
-Content-Type: application/json
-
-{ "chain": "TON", "asset": "USDT", "amount": 25 }
+POST /payments/ton/deposits
+{ "walletAddress": "EQ...", "amountTon": 5, "txHash": "transaction-hash" }
 ```
 
 ```http
-POST /payments/withdrawals
-Authorization: Bearer jwt
-Content-Type: application/json
-
-{ "chain": "TON", "asset": "USDT", "address": "wallet-address", "amount": 25 }
+POST /payments/ton/withdrawals
+{ "walletAddress": "EQ...", "amountTon": 2 }
 ```
 
-## Admin
+## Telegram Stars
 
 ```http
-GET /admin/analytics/revenue
-Authorization: Bearer admin_jwt
+GET /payments/stars/packs
+POST /payments/stars/invoices
+{ "packId": "stars_500", "amountStars": 500, "balanceAmount": 24 }
+POST /payments/stars/confirm
+{ "invoicePayload": "stars:...", "telegramPaymentChargeId": "..." }
 ```
 
-```http
-POST /admin/cases
-Authorization: Bearer admin_jwt
-Content-Type: application/json
+## Economy Admin
 
-{ "slug": "mythic-vault", "title": "Mythic Vault", "price": 95 }
+```http
+GET /economy/admin/dashboard
+POST /economy/admin/cases/:id/rtp
+{ "targetRtp": 0.92, "dynamicDropRates": true }
+POST /economy/admin/auto-balance
+GET /admin/economy/risk
 ```
 
 ## Socket.IO Events
@@ -141,8 +87,7 @@ Client listens:
 - `case:opened`
 - `battle:created`
 - `battle:joined`
-- `battle:round`
-- `battle:finished`
+- `presence:online`
 
 Client emits:
 
