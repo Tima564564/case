@@ -13,6 +13,9 @@ import { rewardsRouter } from "./routes/rewards.js";
 import { referralsRouter } from "./routes/referrals.js";
 import { leaderboardRouter } from "./routes/leaderboard.js";
 import { paymentsRouter } from "./routes/payments.js";
+import { giftsRouter } from "./routes/gifts.js";
+import { marketplaceRouter } from "./routes/marketplace.js";
+import { economyRouter } from "./routes/economy.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -31,6 +34,9 @@ app.use("/rewards", rewardsRouter);
 app.use("/referrals", referralsRouter);
 app.use("/leaderboard", leaderboardRouter);
 app.use("/payments", paymentsRouter);
+app.use("/gifts", giftsRouter);
+app.use("/marketplace", marketplaceRouter);
+app.use("/economy", economyRouter);
 app.use("/admin", adminRouter);
 
 app.use((err: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
@@ -40,7 +46,4 @@ app.use((err: unknown, _req: express.Request, res: express.Response, _next: expr
 });
 
 const port = Number(process.env.PORT ?? env.API_PORT);
-
-server.listen(port, () => {
-  console.log(`API listening on :${port}`);
-});
+server.listen(port, () => console.log(`API listening on :${port}`));
