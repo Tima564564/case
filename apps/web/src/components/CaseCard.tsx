@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Gem, Sparkles } from "lucide-react";
-import type { Rarity } from "@/lib/mock";
+import type { Rarity } from "../lib/mock";
 
 type Drop = {
   name: string;
