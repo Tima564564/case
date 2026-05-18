@@ -1,0 +1,300 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  RISK
+}
+
+enum Rarity {
+  COMMON
+  RARE
+  EPIC
+  LEGENDARY
+  MYTHIC
+}
+
+enum InventoryStatus {
+  OWNED
+  SOLD
+  UPGRADED
+  WITHDRAWN
+  BATTLE_LOCKED
+}
+
+enum LedgerType {
+  DEPOSIT
+  WITHDRAWAL
+  CASE_OPEN
+  ITEM_SELL
+  UPGRADE
+  BATTLE_WIN
+  DAILY_BONUS
+  REFERRAL_REWARD
+  ADMIN_ADJUSTMENT
+}
+
+enum BattleStatus {
+  WAITING
+  RUNNING
+  FINISHED
+  CANCELED
+}
+
+enum PaymentStatus {
+  PENDING
+  CONFIRMED
+  FAILED
+  CANCELED
+}
+
+model User {
+  id             String          @id @default(cuid())
+  telegramId     String          @unique
+  username       String?
+  firstName      String?
+  lastName       String?
+  avatarUrl      String?
+  locale         String          @default("en")
+  role           UserRole        @default(USER)
+  riskScore      Int             @default(0)
+  referralCode   String          @unique @default(cuid())
+  referredById   String?
+  referredBy     User?           @relation("UserReferrals", fields: [referredById], references: [id])
+  referrals      User[]          @relation("UserReferrals")
+  wallet         Wallet?
+  ledgerEntries  WalletLedger[]
+  inventory      InventoryItem[]
+  fairRounds     FairRound[]
+  upgrades       UpgradeAttempt[]
+  battlePlayers  BattlePlayer[]
+  createdBattles Battle[]        @relation("BattleCreator")
+  dailyRewards   DailyReward[]
+  taskProgress   TaskProgress[]
+  payments       CryptoPayment[]
+  lastLoginAt    DateTime?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+model Wallet {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id])
+  balance       Decimal  @db.Decimal(18, 6)
+  lockedBalance Decimal  @db.Decimal(18, 6)
+  updatedAt     DateTime @updatedAt
+}
+
+model WalletLedger {
+  id        String     @id @default(cuid())
+  userId    String
+  user      User       @relation(fields: [userId], references: [id])
+  type      LedgerType
+  amount    Decimal    @db.Decimal(18, 6)
+  currency  String
+  metadata  Json?
+  createdAt DateTime   @default(now())
+
+  @@index([userId, createdAt])
+}
+
+model Case {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  title       String
+  description String?
+  imageUrl    String?
+  price       Decimal      @db.Decimal(18, 6)
+  isActive    Boolean      @default(true)
+  sortOrder   Int          @default(0)
+  drops       CaseDrop[]
+  battleRounds BattleRound[]
+  fairRounds  FairRound[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Item {
+  id              String          @id @default(cuid())
+  sku             String          @unique
+  name            String
+  imageUrl        String?
+  rarity          Rarity
+  value           Decimal         @db.Decimal(18, 6)
+  sellPrice       Decimal         @db.Decimal(18, 6)
+  isWithdrawable  Boolean         @default(false)
+  drops           CaseDrop[]
+  inventoryItems  InventoryItem[]
+  upgradeTargets  UpgradeAttempt[] @relation("UpgradeTarget")
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+model CaseDrop {
+  id        String  @id @default(cuid())
+  caseId    String
+  case      Case    @relation(fields: [caseId], references: [id])
+  itemId    String
+  item      Item    @relation(fields: [itemId], references: [id])
+  weight    Int
+  minRoll   Int?
+  maxRoll   Int?
+  createdAt DateTime @default(now())
+
+  @@index([caseId])
+}
+
+model InventoryItem {
+  id          String          @id @default(cuid())
+  userId      String
+  user        User            @relation(fields: [userId], references: [id])
+  itemId      String
+  item        Item            @relation(fields: [itemId], references: [id])
+  status      InventoryStatus @default(OWNED)
+  source      String
+  fairRoundId String?
+  fairRound   FairRound?      @relation(fields: [fairRoundId], references: [id])
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([userId, status])
+}
+
+model UpgradeAttempt {
+  id                    String   @id @default(cuid())
+  userId                String
+  user                  User     @relation(fields: [userId], references: [id])
+  sourceInventoryItemId String
+  targetItemId          String
+  targetItem            Item     @relation("UpgradeTarget", fields: [targetItemId], references: [id])
+  successChance         Decimal  @db.Decimal(8, 6)
+  success               Boolean
+  fairRoundId           String?
+  fairRound             FairRound? @relation(fields: [fairRoundId], references: [id])
+  createdAt             DateTime @default(now())
+}
+
+model FairRound {
+  id             String          @id @default(cuid())
+  userId         String
+  user           User            @relation(fields: [userId], references: [id])
+  caseId         String?
+  case           Case?           @relation(fields: [caseId], references: [id])
+  serverSeedHash String
+  serverSeed     String?
+  clientSeed     String
+  nonce          Int
+  revealedAt     DateTime?
+  inventoryItems InventoryItem[]
+  upgradeAttempts UpgradeAttempt[]
+  createdAt      DateTime        @default(now())
+}
+
+model Battle {
+  id           String         @id @default(cuid())
+  creatorId    String
+  creator      User           @relation("BattleCreator", fields: [creatorId], references: [id])
+  mode         String
+  status       BattleStatus   @default(WAITING)
+  entryCaseIds String[]
+  players      BattlePlayer[]
+  rounds       BattleRound[]
+  winnerId     String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model BattlePlayer {
+  id        String   @id @default(cuid())
+  battleId  String
+  battle    Battle   @relation(fields: [battleId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  seat      Int
+  totalWin  Decimal  @default(0) @db.Decimal(18, 6)
+  joinedAt  DateTime @default(now())
+
+  @@unique([battleId, userId])
+}
+
+model BattleRound {
+  id        String   @id @default(cuid())
+  battleId  String
+  battle    Battle   @relation(fields: [battleId], references: [id])
+  caseId    String
+  case      Case     @relation(fields: [caseId], references: [id])
+  roundNo   Int
+  result    Json?
+  createdAt DateTime @default(now())
+}
+
+model DailyReward {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  dayKey    String
+  amount    Decimal  @db.Decimal(18, 6)
+  claimedAt DateTime @default(now())
+
+  @@unique([userId, dayKey])
+}
+
+model Task {
+  id          String         @id @default(cuid())
+  code        String         @unique
+  title       Json
+  reward      Decimal        @db.Decimal(18, 6)
+  isActive    Boolean        @default(true)
+  progress    TaskProgress[]
+  createdAt   DateTime       @default(now())
+}
+
+model TaskProgress {
+  id        String   @id @default(cuid())
+  taskId    String
+  task      Task     @relation(fields: [taskId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  value     Int      @default(0)
+  completed Boolean  @default(false)
+  updatedAt DateTime @updatedAt
+
+  @@unique([taskId, userId])
+}
+
+model CryptoPayment {
+  id            String        @id @default(cuid())
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
+  provider      String
+  chain         String
+  asset         String
+  address       String?
+  txHash        String?
+  amount        Decimal       @db.Decimal(24, 10)
+  fiatValue     Decimal?      @db.Decimal(18, 6)
+  status        PaymentStatus @default(PENDING)
+  metadata      Json?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([userId, status])
+  @@index([txHash])
+}
+
+model AdminAuditLog {
+  id        String   @id @default(cuid())
+  adminId   String
+  action    String
+  target    String
+  payload   Json?
+  createdAt DateTime @default(now())
+}
