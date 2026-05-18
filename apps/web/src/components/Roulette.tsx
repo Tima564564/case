@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import type { Rarity } from "@/lib/mock";
+import type { Rarity } from "../lib/mock";
 
 type Prize = {
   name: string;
