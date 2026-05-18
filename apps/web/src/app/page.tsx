@@ -3,11 +3,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { BarChart3, Bell, Crown, ShieldCheck, Swords, Wallet } from "lucide-react";
-import { CaseCard } from "@/components/CaseCard";
-import { LiveFeed } from "@/components/LiveFeed";
-import { Roulette } from "@/components/Roulette";
-import { bootTelegramShell, getTelegramWebApp } from "@/lib/telegram";
-import { cases } from "@/lib/mock";
+import { CaseCard } from "../components/CaseCard";
+import { LiveFeed } from "../components/LiveFeed";
+import { Roulette } from "../components/Roulette";
+import { bootTelegramShell, getTelegramWebApp } from "../lib/telegram";
+import { cases } from "../lib/mock";
 
 const statActions = [
   { label: "Fair", icon: ShieldCheck },
