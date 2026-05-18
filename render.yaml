@@ -4,7 +4,7 @@ services:
     name: case-platform-api
     region: frankfurt
     plan: starter
-    buildCommand: cd apps/api && npm install && npm run build
+    buildCommand: cd apps/api && npm install --include=dev && npm run build
     preDeployCommand: cd apps/api && npx prisma db push --schema ../../packages/db/prisma/schema.prisma
     startCommand: cd apps/api && npm run start
     envVars:
@@ -32,7 +32,7 @@ services:
     name: case-platform-web
     region: frankfurt
     plan: starter
-    buildCommand: cd apps/web && npm install && npm run build
+    buildCommand: cd apps/web && npm install --include=dev && npm run build
     startCommand: cd apps/web && npm run start -- -p $PORT
     envVars:
       - key: NODE_VERSION
@@ -48,4 +48,3 @@ databases:
     plan: basic-256mb
     databaseName: case_platform
     user: case_platform
-  
