@@ -1,64 +1,37 @@
 # Telegram Mini App Case Platform
 
-Premium Web3/case-opening Telegram Mini App scaffold: Next.js + TailwindCSS + Framer Motion frontend, Express + Socket.IO backend, PostgreSQL + Prisma schema, Telegram auth, provably fair primitives, PvP battles, inventory, admin panel boundaries, and crypto-payment integration points.
+Premium Telegram Mini App for Telegram Gift Cases: Next.js + TailwindCSS + Framer Motion frontend, Express + Socket.IO backend, PostgreSQL + Prisma, Telegram auth, gift inventory, marketplace, RTP controls, TON and Telegram Stars payment contracts, VIP rewards, and realtime feeds.
 
-## 1. Project Structure
+## Project Structure
 
 ```txt
-apps/
-  web/                  Next.js Telegram Mini App client
-    src/app/            App Router pages and global styles
-    src/components/     Premium UI components
-    src/lib/            Telegram, API, mock data helpers
-  api/                  Node.js Express API + Socket.IO
-    src/auth/           Telegram initData validation and JWT
-    src/routes/         REST endpoints
-    src/services/       Provably fair, case opening, battle logic
-packages/
-  db/                   Prisma schema and seed entrypoint
-docs/                   Product, API, DB, Telegram, roadmap docs
-docker-compose.yml      PostgreSQL and API service
+apps/web                 Next.js Telegram Mini App client
+apps/api                 Express API + Socket.IO
+packages/db              Prisma schema and seed entrypoint
+docs                     Architecture, API, Telegram, roadmap docs
+render.yaml              Render Blueprint
 ```
 
-## 2. UI/UX Concept
+## Current Feature Set
 
-The product is mobile-first for Telegram WebApp: dark glass surfaces, neon cyan/violet/gold rarity accents, haptic-feeling motion, roulette case openings, sticky balance bar, tab navigation, and compact dense screens for repeat play.
+- Telegram Gift Cases with virtual gifts, animated/seasonal/limited drops, Stars, Premium and TON voucher rewards.
+- Mobile-first EN/RU/UA UI with language switcher, wallet, marketplace, VIP, jackpot, live feed and big-win states.
+- Gift inventory, transfer, marketplace listing/buying and fusion API contracts.
+- Economy controls: target RTP, house edge, profitability, dynamic drop weights, snapshots, risk events and admin dashboards.
+- Payments: TON Connect wallet/deposit/withdrawal contracts, Telegram Stars invoices with `XTR`, internal wallet ledger.
+- Realtime: live openings, PvP rooms and online counter primitives.
 
-See [docs/ui-ux-concept.md](docs/ui-ux-concept.md).
+See [docs/gift-economy-architecture.md](docs/gift-economy-architecture.md).
 
-## 3. Backend Architecture
+## Render Deployment
 
-The backend is split into auth, economy, cases, inventory, PvP, referrals, tasks, admin, payments, and realtime gateways. Express is used for MVP speed; the route boundaries map cleanly to NestJS modules later.
+Create a Blueprint from this repository. Set:
 
-See [docs/backend-architecture.md](docs/backend-architecture.md).
+- `WEB_ORIGIN` on `case-platform-api` to the deployed web URL.
+- `NEXT_PUBLIC_API_URL` on `case-platform-web` to the deployed API URL.
+- `TELEGRAM_BOT_TOKEN` and `TELEGRAM_BOT_USERNAME` from BotFather.
 
-## 4. Database Structure
-
-Prisma models cover users, wallet ledger, cases, items, drops, inventory, upgrades, PvP battles, daily rewards, tasks, referrals, crypto payments, admin audit logs, and provably fair seeds.
-
-See [packages/db/prisma/schema.prisma](packages/db/prisma/schema.prisma) and [docs/database-schema.md](docs/database-schema.md).
-
-## 5. API Examples
-
-REST endpoints are documented for auth, cases, inventory, upgrades, PvP, leaderboard, referrals, rewards, payments, admin, and Socket.IO events.
-
-See [docs/api-examples.md](docs/api-examples.md).
-
-## 6. Telegram Mini App Integration
-
-Frontend reads Telegram WebApp `initData`, sends it to `/auth/telegram`, stores JWT, expands the app, configures theme, haptics, back button, and in-app notifications.
-
-See [docs/telegram-mini-app.md](docs/telegram-mini-app.md).
-
-## 7. Roadmap
-
-MVP launches case opening, inventory, balance ledger, Telegram auth, live feed, daily rewards, and admin case management. Later phases add PvP battles, crypto withdrawals, anti-fraud scoring, multi-language content operations, and analytics.
-
-See [docs/roadmap.md](docs/roadmap.md).
-
-## 8. MVP And Scalable Architecture
-
-MVP uses a single API service and Postgres. Scale path: split realtime gateway, payment workers, fraud engine, admin API, queue-based battle settlement, Redis cache/rate limits, and read replicas for leaderboards.
+After changes, redeploy with `Clear build cache & deploy` if dependencies changed.
 
 ## Local Development
 
@@ -73,10 +46,6 @@ npm run dev
 
 Open `http://localhost:3000` for the Mini App shell and `http://localhost:4000/health` for the API.
 
-## Render Deployment
+## Compliance
 
-This repo includes `render.yaml` for Render Blueprints. Create a new Blueprint from the Git repository, fill the secret values Render asks for, then set:
-
-- `WEB_ORIGIN` on `case-platform-api` to the deployed web URL.
-- `NEXT_PUBLIC_API_URL` on `case-platform-web` to the deployed API URL.
-- `TELEGRAM_BOT_TOKEN` and `TELEGRAM_BOT_USERNAME` from BotFather.
+Real-money gambling, crypto withdrawals, Telegram digital goods and prize mechanics require legal review, age gating, jurisdiction filtering, AML/KYC policy and responsible-gaming controls before production launch.
