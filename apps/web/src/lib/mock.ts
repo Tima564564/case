@@ -7,6 +7,7 @@ export type Drop = {
   rarity: Rarity;
   chance: number;
   tag: string;
+  imageUrl: string;
 };
 
 export type GiftCase = {
@@ -15,8 +16,22 @@ export type GiftCase = {
   price: number;
   hot: boolean;
   image: string;
+  imageUrl: string;
   type: string;
   drops: Drop[];
+};
+
+const giftImages = {
+  perfume: "/gifts/perfume.svg",
+  coffin: "/gifts/coffin.svg",
+  pepe: "/gifts/pepe.svg",
+  redbox: "/gifts/redbox.svg",
+  lollipop: "/gifts/lollipop.svg",
+  orb: "/gifts/orb.svg",
+  cap: "/gifts/cap.svg",
+  snowglobe: "/gifts/snowglobe.svg",
+  star: "/gifts/star.svg",
+  tree: "/gifts/tree.svg"
 };
 
 export const cases: GiftCase[] = [
@@ -26,13 +41,14 @@ export const cases: GiftCase[] = [
     price: 3,
     hot: true,
     image: "PR",
+    imageUrl: giftImages.perfume,
     type: "Telegram gifts",
     drops: [
-      { id: "perfume-lollipop", name: "Lol Pop", value: 5442.8, rarity: "Mythic", chance: 0.12, tag: "Animated" },
-      { id: "perfume-orb", name: "Crystal Orb", value: 269.26, rarity: "Legendary", chance: 1.1, tag: "Gift" },
-      { id: "perfume-bag", name: "Gift Bag", value: 95.69, rarity: "Epic", chance: 4.5, tag: "Seasonal" },
-      { id: "perfume-ring", name: "Love Ring", value: 38.4, rarity: "Rare", chance: 18, tag: "Collectible" },
-      { id: "perfume-bear", name: "Plush Bear", value: 8.7, rarity: "Common", chance: 76.28, tag: "Gift" }
+      { id: "perfume-lollipop", name: "Lol Pop", value: 5442.8, rarity: "Mythic", chance: 0.12, tag: "Animated", imageUrl: giftImages.lollipop },
+      { id: "perfume-orb", name: "Crystal Orb", value: 269.26, rarity: "Legendary", chance: 1.1, tag: "Gift", imageUrl: giftImages.orb },
+      { id: "perfume-bag", name: "Gift Bag", value: 95.69, rarity: "Epic", chance: 4.5, tag: "Seasonal", imageUrl: giftImages.redbox },
+      { id: "perfume-ring", name: "Love Ring", value: 38.4, rarity: "Rare", chance: 18, tag: "Collectible", imageUrl: giftImages.star },
+      { id: "perfume-bear", name: "Plush Bear", value: 8.7, rarity: "Common", chance: 76.28, tag: "Gift", imageUrl: giftImages.pepe }
     ]
   },
   {
@@ -41,13 +57,14 @@ export const cases: GiftCase[] = [
     price: 7,
     hot: true,
     image: "PP",
+    imageUrl: giftImages.pepe,
     type: "Animated gifts",
     drops: [
-      { id: "pepe-gold", name: "Gold Pepe", value: 1290, rarity: "Mythic", chance: 0.25, tag: "Animated" },
-      { id: "pepe-crown", name: "Crown Pepe", value: 420, rarity: "Legendary", chance: 1.4, tag: "Limited" },
-      { id: "pepe-plush", name: "Green Plush", value: 86, rarity: "Epic", chance: 6.35, tag: "Gift" },
-      { id: "pepe-sticker", name: "Rare Sticker", value: 22, rarity: "Rare", chance: 24, tag: "Collectible" },
-      { id: "pepe-card", name: "Gift Card", value: 4.8, rarity: "Common", chance: 68, tag: "Gift" }
+      { id: "pepe-gold", name: "Gold Pepe", value: 1290, rarity: "Mythic", chance: 0.25, tag: "Animated", imageUrl: giftImages.pepe },
+      { id: "pepe-crown", name: "Crown Pepe", value: 420, rarity: "Legendary", chance: 1.4, tag: "Limited", imageUrl: giftImages.star },
+      { id: "pepe-plush", name: "Green Plush", value: 86, rarity: "Epic", chance: 6.35, tag: "Gift", imageUrl: giftImages.pepe },
+      { id: "pepe-sticker", name: "Rare Sticker", value: 22, rarity: "Rare", chance: 24, tag: "Collectible", imageUrl: giftImages.orb },
+      { id: "pepe-card", name: "Gift Card", value: 4.8, rarity: "Common", chance: 68, tag: "Gift", imageUrl: giftImages.redbox }
     ]
   },
   {
@@ -56,13 +73,14 @@ export const cases: GiftCase[] = [
     price: 15,
     hot: false,
     image: "DC",
+    imageUrl: giftImages.cap,
     type: "Rare Telegram items",
     drops: [
-      { id: "cap-black", name: "Black Cap", value: 2400, rarity: "Mythic", chance: 0.18, tag: "Limited" },
-      { id: "cap-silver", name: "Silver Cap", value: 690, rarity: "Legendary", chance: 1.22, tag: "Collectible" },
-      { id: "cap-blue", name: "Blue Cap", value: 160, rarity: "Epic", chance: 7.6, tag: "Gift" },
-      { id: "cap-pin", name: "Telegram Pin", value: 34, rarity: "Rare", chance: 28, tag: "Gift" },
-      { id: "cap-box", name: "Mini Gift Box", value: 9.5, rarity: "Common", chance: 63, tag: "Gift" }
+      { id: "cap-black", name: "Black Cap", value: 2400, rarity: "Mythic", chance: 0.18, tag: "Limited", imageUrl: giftImages.cap },
+      { id: "cap-silver", name: "Silver Cap", value: 690, rarity: "Legendary", chance: 1.22, tag: "Collectible", imageUrl: giftImages.cap },
+      { id: "cap-blue", name: "Blue Cap", value: 160, rarity: "Epic", chance: 7.6, tag: "Gift", imageUrl: giftImages.cap },
+      { id: "cap-pin", name: "Telegram Pin", value: 34, rarity: "Rare", chance: 28, tag: "Gift", imageUrl: giftImages.star },
+      { id: "cap-box", name: "Mini Gift Box", value: 9.5, rarity: "Common", chance: 63, tag: "Gift", imageUrl: giftImages.redbox }
     ]
   },
   {
@@ -71,13 +89,14 @@ export const cases: GiftCase[] = [
     price: 29,
     hot: false,
     image: "HD",
+    imageUrl: giftImages.redbox,
     type: "Seasonal gifts",
     drops: [
-      { id: "holiday-tree", name: "Holiday Tree", value: 3200, rarity: "Mythic", chance: 0.15, tag: "Seasonal" },
-      { id: "holiday-star", name: "Frozen Star", value: 870, rarity: "Legendary", chance: 1.2, tag: "Animated" },
-      { id: "holiday-snow", name: "Snow Globe", value: 210, rarity: "Epic", chance: 8.65, tag: "Gift" },
-      { id: "holiday-cake", name: "Cake Gift", value: 54, rarity: "Rare", chance: 30, tag: "Gift" },
-      { id: "holiday-box", name: "Red Gift Box", value: 14, rarity: "Common", chance: 60, tag: "Gift" }
+      { id: "holiday-tree", name: "Holiday Tree", value: 3200, rarity: "Mythic", chance: 0.15, tag: "Seasonal", imageUrl: giftImages.tree },
+      { id: "holiday-star", name: "Frozen Star", value: 870, rarity: "Legendary", chance: 1.2, tag: "Animated", imageUrl: giftImages.star },
+      { id: "holiday-snow", name: "Snow Globe", value: 210, rarity: "Epic", chance: 8.65, tag: "Gift", imageUrl: giftImages.snowglobe },
+      { id: "holiday-cake", name: "Cake Gift", value: 54, rarity: "Rare", chance: 30, tag: "Gift", imageUrl: giftImages.perfume },
+      { id: "holiday-box", name: "Red Gift Box", value: 14, rarity: "Common", chance: 60, tag: "Gift", imageUrl: giftImages.redbox }
     ]
   }
 ];
@@ -89,9 +108,9 @@ export const liveFeed = [
 ];
 
 export const inventorySeed: Drop[] = [
-  { id: "owned-bear", name: "Plush Bear", value: 8.7, rarity: "Common", chance: 0, tag: "Gift" },
-  { id: "owned-ring", name: "Love Ring", value: 38.4, rarity: "Rare", chance: 0, tag: "Collectible" },
-  { id: "owned-snow", name: "Snow Globe", value: 210, rarity: "Epic", chance: 0, tag: "Gift" }
+  { id: "owned-bear", name: "Plush Bear", value: 8.7, rarity: "Common", chance: 0, tag: "Gift", imageUrl: giftImages.pepe },
+  { id: "owned-ring", name: "Love Ring", value: 38.4, rarity: "Rare", chance: 0, tag: "Collectible", imageUrl: giftImages.star },
+  { id: "owned-snow", name: "Snow Globe", value: 210, rarity: "Epic", chance: 0, tag: "Gift", imageUrl: giftImages.snowglobe }
 ];
 
 export const battles = [
