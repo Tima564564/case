@@ -60,3 +60,17 @@ a {
 .rarity-mythic {
   --rarity: #ff4df3;
 }
+
+.ton-connect-shell {
+  overflow: hidden;
+}
+
+.ton-connect-shell button {
+  width: 100%;
+  justify-content: center;
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, #00f0ff, #ffffff) !important;
+  color: #07111f !important;
+  font-weight: 900 !important;
+  box-shadow: 0 0 26px rgba(0, 240, 255, .24) !important;
+}
