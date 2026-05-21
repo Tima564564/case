@@ -18,7 +18,7 @@ type Props = {
 
 export function Roulette({ isOpen, items, result, caseName, price = 0, balance = 0, onClose, onDeposit, onSell }: Props) {
   const notEnoughFunds = !result && balance < price;
-  const featured = items.slice(-3).reverse();
+  const featured = items.slice(0, 3);
   const title = caseName ?? inferCaseName(items);
 
   return (
