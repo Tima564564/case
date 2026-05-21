@@ -21,83 +21,83 @@ export type GiftCase = {
 
 export const cases: GiftCase[] = [
   {
-    id: "tg-starter",
-    name: "TG Starter Gifts",
-    price: 4.9,
+    id: "perfume",
+    name: "Perfume",
+    price: 3,
     hot: true,
-    image: "TG",
+    image: "PR",
     type: "Telegram gifts",
     drops: [
-      { id: "star-pack-50", name: "50 Stars Pack", value: 2, rarity: "Common", chance: 46, tag: "Stars" },
-      { id: "premium-1m", name: "Premium 1 Month", value: 7, rarity: "Rare", chance: 28, tag: "Premium" },
-      { id: "gift-basic", name: "Limited Gift Box", value: 18, rarity: "Epic", chance: 14, tag: "Gift" },
-      { id: "ton-mini", name: "TON Voucher", value: 45, rarity: "Legendary", chance: 9, tag: "TON" },
-      { id: "gift-myth", name: "Rare Collectible", value: 120, rarity: "Mythic", chance: 3, tag: "Collectible" }
+      { id: "perfume-lollipop", name: "Lol Pop", value: 5442.8, rarity: "Mythic", chance: 0.12, tag: "Animated" },
+      { id: "perfume-orb", name: "Crystal Orb", value: 269.26, rarity: "Legendary", chance: 1.1, tag: "Gift" },
+      { id: "perfume-bag", name: "Gift Bag", value: 95.69, rarity: "Epic", chance: 4.5, tag: "Seasonal" },
+      { id: "perfume-ring", name: "Love Ring", value: 38.4, rarity: "Rare", chance: 18, tag: "Collectible" },
+      { id: "perfume-bear", name: "Plush Bear", value: 8.7, rarity: "Common", chance: 76.28, tag: "Gift" }
     ]
   },
   {
-    id: "stars-vault",
-    name: "Stars Vault",
-    price: 12,
+    id: "plush-pepe",
+    name: "Plush Pepe",
+    price: 7,
     hot: true,
-    image: "ST",
-    type: "Stars and premium",
+    image: "PP",
+    type: "Animated gifts",
     drops: [
-      { id: "star-pack-100", name: "100 Stars", value: 4, rarity: "Common", chance: 42, tag: "Stars" },
-      { id: "star-pack-250", name: "250 Stars", value: 10, rarity: "Rare", chance: 30, tag: "Stars" },
-      { id: "premium-3m", name: "Premium 3 Months", value: 21, rarity: "Epic", chance: 17, tag: "Premium" },
-      { id: "ton-card", name: "TON Gift Card", value: 75, rarity: "Legendary", chance: 8, tag: "TON" },
-      { id: "stars-jackpot", name: "2500 Stars Jackpot", value: 150, rarity: "Mythic", chance: 3, tag: "Stars" }
+      { id: "pepe-gold", name: "Gold Pepe", value: 1290, rarity: "Mythic", chance: 0.25, tag: "Animated" },
+      { id: "pepe-crown", name: "Crown Pepe", value: 420, rarity: "Legendary", chance: 1.4, tag: "Limited" },
+      { id: "pepe-plush", name: "Green Plush", value: 86, rarity: "Epic", chance: 6.35, tag: "Gift" },
+      { id: "pepe-sticker", name: "Rare Sticker", value: 22, rarity: "Rare", chance: 24, tag: "Collectible" },
+      { id: "pepe-card", name: "Gift Card", value: 4.8, rarity: "Common", chance: 68, tag: "Gift" }
     ]
   },
   {
-    id: "collectible-gifts",
-    name: "Collectible Gifts",
+    id: "durov-cap",
+    name: "Durov Cap",
+    price: 15,
+    hot: false,
+    image: "DC",
+    type: "Rare Telegram items",
+    drops: [
+      { id: "cap-black", name: "Black Cap", value: 2400, rarity: "Mythic", chance: 0.18, tag: "Limited" },
+      { id: "cap-silver", name: "Silver Cap", value: 690, rarity: "Legendary", chance: 1.22, tag: "Collectible" },
+      { id: "cap-blue", name: "Blue Cap", value: 160, rarity: "Epic", chance: 7.6, tag: "Gift" },
+      { id: "cap-pin", name: "Telegram Pin", value: 34, rarity: "Rare", chance: 28, tag: "Gift" },
+      { id: "cap-box", name: "Mini Gift Box", value: 9.5, rarity: "Common", chance: 63, tag: "Gift" }
+    ]
+  },
+  {
+    id: "holiday-drop",
+    name: "Holiday Drop",
     price: 29,
     hot: false,
-    image: "CG",
-    type: "Rare Telegram gifts",
+    image: "HD",
+    type: "Seasonal gifts",
     drops: [
-      { id: "gift-silver", name: "Silver Gift", value: 16, rarity: "Common", chance: 48, tag: "Gift" },
-      { id: "gift-neon", name: "Neon Gift", value: 38, rarity: "Rare", chance: 27, tag: "Gift" },
-      { id: "gift-crystal", name: "Crystal Gift", value: 95, rarity: "Epic", chance: 15, tag: "Gift" },
-      { id: "gift-royal", name: "Royal Telegram Gift", value: 290, rarity: "Legendary", chance: 7, tag: "Collectible" },
-      { id: "gift-founder", name: "Founder Collectible", value: 820, rarity: "Mythic", chance: 3, tag: "Collectible" }
-    ]
-  },
-  {
-    id: "ton-whale",
-    name: "TON Whale Case",
-    price: 79,
-    hot: false,
-    image: "TN",
-    type: "High roller",
-    drops: [
-      { id: "ton-25", name: "25 TON Ticket", value: 55, rarity: "Rare", chance: 50, tag: "TON" },
-      { id: "ton-60", name: "60 TON Ticket", value: 132, rarity: "Epic", chance: 28, tag: "TON" },
-      { id: "premium-year", name: "Premium Year", value: 89, rarity: "Epic", chance: 12, tag: "Premium" },
-      { id: "ton-200", name: "200 TON Ticket", value: 440, rarity: "Legendary", chance: 8, tag: "TON" },
-      { id: "gift-whale", name: "Whale Collectible", value: 1500, rarity: "Mythic", chance: 2, tag: "Collectible" }
+      { id: "holiday-tree", name: "Holiday Tree", value: 3200, rarity: "Mythic", chance: 0.15, tag: "Seasonal" },
+      { id: "holiday-star", name: "Frozen Star", value: 870, rarity: "Legendary", chance: 1.2, tag: "Animated" },
+      { id: "holiday-snow", name: "Snow Globe", value: 210, rarity: "Epic", chance: 8.65, tag: "Gift" },
+      { id: "holiday-cake", name: "Cake Gift", value: 54, rarity: "Rare", chance: 30, tag: "Gift" },
+      { id: "holiday-box", name: "Red Gift Box", value: 14, rarity: "Common", chance: 60, tag: "Gift" }
     ]
   }
 ];
 
 export const liveFeed = [
-  { user: "vlad", item: "Founder Collectible", value: 820, rarity: "Mythic" as Rarity },
-  { user: "anna", item: "TON Gift Card", value: 75, rarity: "Legendary" as Rarity },
-  { user: "max", item: "Premium 3 Months", value: 21, rarity: "Epic" as Rarity }
+  { user: "giftboss", item: "Lol Pop", value: 5442.8, rarity: "Mythic" as Rarity },
+  { user: "tonmax", item: "Frozen Star", value: 870, rarity: "Legendary" as Rarity },
+  { user: "starsqueen", item: "Blue Cap", value: 160, rarity: "Epic" as Rarity }
 ];
 
 export const inventorySeed: Drop[] = [
-  { id: "premium-1m-owned", name: "Premium 1 Month", value: 7, rarity: "Rare", chance: 0, tag: "Premium" },
-  { id: "gift-neon-owned", name: "Neon Gift", value: 38, rarity: "Rare", chance: 0, tag: "Gift" },
-  { id: "star-pack-250-owned", name: "250 Stars", value: 10, rarity: "Rare", chance: 0, tag: "Stars" }
+  { id: "owned-bear", name: "Plush Bear", value: 8.7, rarity: "Common", chance: 0, tag: "Gift" },
+  { id: "owned-ring", name: "Love Ring", value: 38.4, rarity: "Rare", chance: 0, tag: "Collectible" },
+  { id: "owned-snow", name: "Snow Globe", value: 210, rarity: "Epic", chance: 0, tag: "Gift" }
 ];
 
 export const battles = [
-  { id: "b1", title: "Stars Duel", pot: 48, players: "1/2", status: "Waiting" },
+  { id: "b1", title: "Perfume Duel", pot: 48, players: "1/2", status: "Waiting" },
   { id: "b2", title: "Gift Clash", pot: 116, players: "2/2", status: "Live" },
-  { id: "b3", title: "TON High Roll", pot: 316, players: "3/4", status: "Watching" }
+  { id: "b3", title: "Durov High Roll", pot: 316, players: "3/4", status: "Watching" }
 ];
 
 export const tasks = [
@@ -107,15 +107,15 @@ export const tasks = [
 ];
 
 export const leaders = [
-  { user: "giftboss", volume: 12840, best: "Whale Collectible" },
-  { user: "tonmax", volume: 9840, best: "Founder Collectible" },
-  { user: "starsqueen", volume: 6420, best: "2500 Stars Jackpot" }
+  { user: "giftboss", volume: 12840, best: "Lol Pop" },
+  { user: "tonmax", volume: 9840, best: "Black Cap" },
+  { user: "starsqueen", volume: 6420, best: "Frozen Star" }
 ];
 
 export const marketplaceListings = [
-  { id: "m1", seller: "giftboss", item: "Royal Telegram Gift", rarity: "Legendary" as Rarity, price: 238, currency: "TON", tag: "Limited" },
-  { id: "m2", seller: "starsqueen", item: "2500 Stars Jackpot", rarity: "Mythic" as Rarity, price: 410, currency: "TON", tag: "Animated" },
-  { id: "m3", seller: "tonmax", item: "Premium Year", rarity: "Epic" as Rarity, price: 72, currency: "USD", tag: "Premium" }
+  { id: "m1", seller: "giftboss", item: "Silver Cap", rarity: "Legendary" as Rarity, price: 238, currency: "TON", tag: "Limited" },
+  { id: "m2", seller: "starsqueen", item: "Gold Pepe", rarity: "Mythic" as Rarity, price: 410, currency: "TON", tag: "Animated" },
+  { id: "m3", seller: "tonmax", item: "Snow Globe", rarity: "Epic" as Rarity, price: 72, currency: "TON", tag: "Seasonal" }
 ];
 
 export const starsPacks = [
