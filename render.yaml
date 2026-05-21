@@ -45,6 +45,8 @@ services:
         value: https://case-platform-web.onrender.com/tonconnect-manifest.json
       - key: NEXT_PUBLIC_TWA_RETURN_URL
         sync: false
+      - key: NEXT_PUBLIC_TON_DEPOSIT_WALLET
+        sync: false
 
 databases:
   - name: case-platform-db
