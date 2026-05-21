@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { AppProviders } from "./providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Case Mini App",
-  description: "Premium Telegram case-opening platform"
+  title: "CASE Gifts",
+  description: "Premium Telegram gift case platform with TON Connect"
 };
 
 export const viewport: Viewport = {
@@ -20,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
-        {children}
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );
